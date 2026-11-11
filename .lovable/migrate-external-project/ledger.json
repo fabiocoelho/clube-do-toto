@@ -1,6 +1,30 @@
 [
-  {"capability":"code","source":"github:fabiocoelho/portfolio-hf1d@5427e5a","outcome":"migrate","status":"in_progress","next_action":"copy source files"},
-  {"capability":"schema_records_auth","source":"none detected","outcome":"not_applicable","status":"verified","next_action":"none - static landing page"},
-  {"capability":"external_providers","source":"WhatsApp link (wa.me), Google Fonts","outcome":"preserve","status":"in_progress","next_action":"keep links as-is"},
-  {"capability":"secrets","source":"none detected","outcome":"not_applicable","status":"verified","next_action":"none"}
+  {
+    "capability": "code",
+    "source": "github:fabiocoelho/portfolio-hf1d@5427e5a",
+    "outcome": "migrate",
+    "status": "verified",
+    "next_action": "none"
+  },
+  {
+    "capability": "schema_records_auth",
+    "source": "none detected",
+    "outcome": "not_applicable",
+    "status": "verified",
+    "next_action": "none - static landing page"
+  },
+  {
+    "capability": "external_providers",
+    "source": "WhatsApp link (wa.me), Google Fonts",
+    "outcome": "preserve",
+    "status": "verified",
+    "next_action": "none"
+  },
+  {
+    "capability": "secrets",
+    "source": "none detected",
+    "outcome": "not_applicable",
+    "status": "verified",
+    "next_action": "none"
+  }
 ]
