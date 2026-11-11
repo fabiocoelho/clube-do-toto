@@ -155,8 +155,8 @@ export function Hero() {
               <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary" />
             </span>
             <div>
-              <p className="text-sm font-medium">Agendamento aberto</p>
-              <p className="text-xs text-muted-foreground">Horários esta semana</p>
+              <p className="text-sm font-medium">Agendamento Rápido</p>
+              <p className="text-xs text-muted-foreground">Consulte no WhatsApp</p>
             </div>
             <CalendarCheck className="h-5 w-5 text-primary" strokeWidth={1.5} />
           </div>
