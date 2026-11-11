@@ -3,11 +3,16 @@ import { motion, type HTMLMotionProps } from "framer-motion";
 export const WHATSAPP_URL =
   "https://wa.me/5500000000000?text=Ol%C3%A1!%20Quero%20agendar%20um%20hor%C3%A1rio%20no%20Clube%20do%20Tot%C3%B3";
 
+/** Static "Clube do Totó" fallbacks, used when a lead's column is empty. */
 export const MAPS_EMBED_URL = "https://www.google.com/maps?q=Porto+Alegre,+RS,+Brasil&z=13&output=embed";
 export const MAPS_DIRECTIONS_URL = "https://www.google.com/maps/dir/?api=1&destination=Porto+Alegre,+RS,+Brasil";
 export const ADDRESS = "Rua das Acácias, 123 — Jardim Botânico";
-export const INSTAGRAM_URL = "https://instagram.com/clubedototo";
-export const TIKTOK_URL = "https://www.tiktok.com/@clubedototo";
+export const GOOGLE_REVIEW_URL = "https://www.google.com/search?q=Pet+Shop+Clube+do+Tot%C3%B3+Porto+Alegre";
+export const WIFI_PASSWORD = "clubedototo2026";
+
+/** Fixed for every lead (not parametrized). */
+export const INSTAGRAM_URL = "https://instagram.com/eu.fcoelho";
+export const INSTAGRAM_HANDLE = "@eu.fcoelho";
 
 export function Reveal({ delay = 0, ...props }: HTMLMotionProps<"div"> & { delay?: number }) {
   return (

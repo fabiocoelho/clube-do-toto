@@ -42,3 +42,26 @@ export function parseReviews(dist: unknown) {
 export function formatRating(n: number | null | undefined): string {
   return (Number(n) || 5).toFixed(1).replace(".", ",");
 }
+
+/** Trimmed text, or null when empty / "None" / "null" (common placeholders in the table). */
+export function cleanText(raw: unknown): string | null {
+  if (typeof raw !== "string") return null;
+  const s = raw.trim();
+  if (!s || /^(none|null|undefined)$/i.test(s)) return null;
+  return s;
+}
+
+/** Absolute http(s) URL, or null. Adds https:// when the scheme is missing. */
+export function cleanUrl(raw: unknown): string | null {
+  const s = cleanText(raw);
+  if (!s) return null;
+  return /^https?:\/\//i.test(s) ? s : `https://${s}`;
+}
+
+export function mapsEmbedUrl(address: string): string {
+  return `https://www.google.com/maps?q=${encodeURIComponent(address)}&z=16&output=embed`;
+}
+
+export function mapsDirectionsUrl(address: string): string {
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}`;
+}
