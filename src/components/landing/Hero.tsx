@@ -84,7 +84,7 @@ export function Hero() {
       <header className="fixed inset-x-0 top-0 z-50 border-b border-ink-foreground/10 bg-ink/90 text-ink-foreground pt-[env(safe-area-inset-top)] backdrop-blur-md">
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-[max(1.5rem,env(safe-area-inset-left))] sm:h-20 lg:px-10">
         <a href="#" className="font-serif text-xl tracking-tight sm:text-2xl">
-          Clube do Totó<span className="text-primary">.</span>
+          Pet Shop Clube do Totó<span className="text-primary">.</span>
         </a>
         <div className="hidden items-center gap-10 text-sm text-ink-muted md:flex">
           <a href="#servicos" className="transition-colors hover:text-ink-foreground">Serviços</a>
