@@ -1,5 +1,8 @@
-import { Clock, Instagram, MapPin, Phone } from "lucide-react";
+import { Clock, Instagram, MapPin, Navigation, Phone } from "lucide-react";
 import { Reveal, WHATSAPP_URL, WhatsAppIcon } from "./shared";
+
+const MAPS_EMBED_URL = "https://www.google.com/maps?q=Porto+Alegre,+RS,+Brasil&z=13&output=embed";
+const MAPS_DIRECTIONS_URL = "https://www.google.com/maps/dir/?api=1&destination=Porto+Alegre,+RS,+Brasil";
 
 export function Contact() {
   return (
@@ -32,17 +35,22 @@ export function Contact() {
 
           <Reveal delay={0.15}>
             <div className="relative aspect-[21/9] overflow-hidden rounded-[1.5rem] border border-ink-foreground/10 bg-ink-soft sm:aspect-[4/3] sm:rounded-[2rem] lg:aspect-auto lg:h-[min(56svh,30rem)]">
-              <div className="absolute inset-0 opacity-40 [background-image:linear-gradient(var(--ink-muted)_1px,transparent_1px),linear-gradient(90deg,var(--ink-muted)_1px,transparent_1px)] [background-size:56px_56px] [mask-image:radial-gradient(circle_at_center,black,transparent_75%)]" />
-              <div className="absolute left-0 right-0 top-[45%] h-3 -rotate-6 bg-ink-muted/20" />
-              <div className="absolute bottom-0 left-[38%] top-0 w-3 rotate-12 bg-ink-muted/20" />
-              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-full">
-                <span className="absolute left-1/2 top-full h-6 w-6 -translate-x-1/2 -translate-y-1/2 animate-ping rounded-full bg-primary/50" />
-                <div className="relative flex h-12 w-12 items-center justify-center rounded-full rounded-bl-none bg-primary shadow-2xl [transform:rotate(-45deg)]">
-                  <MapPin className="h-5 w-5 rotate-45 text-primary-foreground" />
-                </div>
-              </div>
-              <a href="https://maps.google.com" target="_blank" rel="noreferrer" className="absolute bottom-4 left-4 rounded-full bg-ink/80 px-4 py-2 text-xs backdrop-blur transition-colors hover:bg-ink sm:bottom-5 sm:left-5">
-                Abrir no Google Maps ↗
+              <iframe
+                title="Mapa da localização do Clube do Totó em Porto Alegre"
+                src={MAPS_EMBED_URL}
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+                className="absolute inset-0 h-full w-full border-0"
+              />
+              <a
+                href={MAPS_DIRECTIONS_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full bg-ink/80 px-4 py-2 text-xs backdrop-blur transition-colors hover:bg-ink sm:bottom-5 sm:left-5"
+              >
+                <Navigation className="h-3.5 w-3.5 text-primary" strokeWidth={1.8} />
+                Como Chegar (GPS)
               </a>
             </div>
           </Reveal>
