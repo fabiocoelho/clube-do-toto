@@ -15,4 +15,6 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  // Pre-bundle framer-motion with React so it never gets a separate React copy.
+  vite: { optimizeDeps: { include: ["framer-motion"] } },
 });
