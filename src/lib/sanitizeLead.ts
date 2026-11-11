@@ -4,7 +4,7 @@ const LOWER = new Set(["de", "da", "do", "das", "dos", "e", "em", "a", "o"]);
 
 export function cleanBusinessName(raw: string | null | undefined): string {
   if (!raw) return "";
-  let s = raw.split(/\s[-|–]\s|\(/)[0];
+  let s = raw.split(/\s[-|–]\s|\(/)[0] ?? "";
   s = s.replace(/\b(LTDA|EIRELI|EPP|ME|S\/A|S\.A\.?|SA)\b\.?/gi, " ");
   s = s.replace(/\s+/g, " ").trim().replace(/[-,.\s]+$/, "");
   return s
@@ -35,7 +35,7 @@ export type ReviewDistribution = Partial<Record<"oneStar" | "twoStar" | "threeSt
 export function parseReviews(dist: unknown) {
   const obj = (dist && typeof dist === "object" ? dist : {}) as Record<string, unknown>;
   const total = Object.values(obj).reduce<number>((s, v) => s + (Number(v) || 0), 0);
-  const fiveStar = Number(obj.fiveStar) || 0;
+  const fiveStar = Number(obj["fiveStar"]) || 0;
   return { total, fiveStar, showTestimonials: fiveStar > 10 };
 }
 
