@@ -137,3 +137,7 @@
 @utility animate-marquee { animation: marquee 40s linear infinite; }
 @utility pause-on-hover { &:hover .animate-marquee { animation-play-state: paused; } }
 body { font-family: var(--font-sans); }
+@keyframes fade-in { from { opacity: 0; transform: translateY(12px) } to { opacity: 1; transform: translateY(0) } }
+@keyframes pulse-ring { 0% { box-shadow: 0 0 0 0 color-mix(in oklch, var(--primary) 55%, transparent) } 70%,100% { box-shadow: 0 0 0 14px transparent } }
+@utility animate-fade-in { animation: fade-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@utility animate-pulse-ring { animation: pulse-ring 2s ease-out infinite; }

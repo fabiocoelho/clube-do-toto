@@ -15,3 +15,10 @@ describe("App routing", () => {
     expect(matches.at(-1)?.routeId).not.toBe(rootRouteId);
   });
 });
+
+describe("Bio site", () => {
+  it("matches the /smartsite page", () => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+    expect(router.matchRoutes("/smartsite").at(-1)?.routeId).toBe("/smartsite");
+  });
+});
