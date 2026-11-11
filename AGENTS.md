@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- Background video play/pause behavior lives in `src/components/landing/useVideoControl.ts` and is reused by every page with a background video, so behavior stays identical everywhere.
+- Business contact data (WhatsApp, address, maps, social links) is exported from `src/components/landing/shared.tsx`; pages import it instead of duplicating values.
