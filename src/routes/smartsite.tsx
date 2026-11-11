@@ -7,7 +7,6 @@ import {
   Globe,
   Instagram,
   MapPin,
-  Music2,
   PawPrint,
   QrCode,
   Scissors,
@@ -24,14 +23,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import {
-  ADDRESS,
-  INSTAGRAM_URL,
-  MAPS_DIRECTIONS_URL,
-  MAPS_EMBED_URL,
-  TIKTOK_URL,
-  WhatsAppIcon,
-} from "@/components/landing/shared";
+import { INSTAGRAM_URL, WhatsAppIcon } from "@/components/landing/shared";
 import { useVideoControl } from "@/components/landing/useVideoControl";
 import { LeadGate, useLead } from "@/components/landing/lead";
 // Temporary gallery: the project's own photos until real "Nosso Espaço" shots arrive.
@@ -44,13 +36,6 @@ const HERO_VIDEO = "/hero-dog-loop.mp4";
 const HERO_POSTER = "/hero-dog-poster.jpg";
 
 const gallery = [g1, g2, g3, g4];
-
-/** Dados do Wi-Fi (edite aqui) */
-const WIFI_PASSWORD = "clubedototo2026";
-
-/** Dados do PIX (edite aqui) */
-
-const GOOGLE_REVIEW_URL = "https://www.google.com/search?q=Pet+Shop+Clube+do+Tot%C3%B3+Porto+Alegre";
 
 const copyText = async (text: string, successMessage: string) => {
   try {
@@ -117,7 +102,7 @@ function SmartSitePage() {
 function SmartSite() {
   const lead = useLead();
   const BRAND = lead.name;
-  const WIFI = { network: `${BRAND.replace(/\s+/g, "")}_Clientes`, password: WIFI_PASSWORD };
+  const WIFI = { network: `${BRAND.replace(/\s+/g, "")}_Clientes`, password: lead.wifiPassword };
   const PIX = { favorecido: BRAND, chave: lead.whatsappDigits };
   const WHATSAPP_URL = lead.whatsappUrl;
   const [isScrolled, setIsScrolled] = useState(false);
@@ -187,10 +172,10 @@ function SmartSite() {
           </div>
 
           <div className="w-full flex flex-col items-center">
-            {!lead.closed && <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={`animate-pulse-ring ${ctaClass}`}>
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={`animate-pulse-ring ${ctaClass}`}>
               <Calendar className="size-5" />
               Agendar Horário
-            </a>}
+            </a>
           </div>
         </div>
       </section>
@@ -199,7 +184,7 @@ function SmartSite() {
         {/* CTAs */}
         <nav className="w-full flex flex-col gap-3 animate-fade-in" aria-label="Links principais">
           <a
-            href={GOOGLE_REVIEW_URL}
+            href={lead.reviewUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full flex items-center gap-3 rounded-full border-[3px] border-dotted border-primary bg-primary/10 px-6 h-[62px] md:h-[49px] font-semibold text-ink-foreground transition-colors hover:bg-primary/20"
@@ -217,12 +202,10 @@ function SmartSite() {
             <Scissors className="size-5 text-primary" />
             Nossos Serviços
           </Link>
-          {!lead.closed && (
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={linkButtonClass}>
-              <WhatsAppIcon className="size-5 text-primary" />
-              Fale Conosco
-            </a>
-          )}
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={linkButtonClass}>
+            <WhatsAppIcon className="size-5 text-primary" />
+            Fale Conosco
+          </a>
 
           {/* Wi-Fi */}
           <Dialog>
@@ -320,7 +303,7 @@ function SmartSite() {
           <div className="overflow-hidden rounded-2xl border border-ink-foreground/10">
             <iframe
               title={`Localização ${BRAND}`}
-              src={MAPS_EMBED_URL}
+              src={lead.mapsEmbedUrl}
               className="w-full h-56 pointer-events-none"
               style={{ border: 0 }}
               loading="lazy"
@@ -328,7 +311,7 @@ function SmartSite() {
               referrerPolicy="no-referrer-when-downgrade"
             />
           </div>
-          <a href={MAPS_DIRECTIONS_URL} target="_blank" rel="noopener noreferrer" className={`${ctaClass} mt-4`}>
+          <a href={lead.mapsDirectionsUrl} target="_blank" rel="noopener noreferrer" className={`${ctaClass} mt-4`}>
             <MapPin className="size-5" />
             Navegar Agora (GPS)
           </a>
@@ -340,18 +323,8 @@ function SmartSite() {
             <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-ink-foreground/70 hover:text-primary transition-colors">
               <Instagram className="size-6" />
             </a>
-            <a href={TIKTOK_URL} target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="text-ink-foreground/70 hover:text-primary transition-colors">
-              <Music2 className="size-6" />
-            </a>
           </div>
-          <a
-            href={MAPS_DIRECTIONS_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs text-ink-foreground/60 hover:text-ink-foreground transition-colors leading-relaxed"
-          >
-            {ADDRESS}
-          </a>
+          <p className="text-xs text-ink-foreground/60 leading-relaxed">{lead.address}</p>
         </footer>
       </div>
     </div>

@@ -62,9 +62,9 @@ export function Hero() {
           <a href="#faq" className="transition-colors hover:text-ink-foreground">Dúvidas</a>
           <a href="#contato" className="transition-colors hover:text-ink-foreground">Contato</a>
         </div>
-        {!lead.closed && <a href={lead.whatsappUrl} target="_blank" rel="noreferrer" className="rounded-full border border-ink-foreground/20 px-4 py-1.5 text-sm transition-colors sm:px-5 sm:py-2 hover:bg-ink-foreground hover:text-ink">
+        <a href={lead.whatsappUrl} target="_blank" rel="noreferrer" className="rounded-full border border-ink-foreground/20 px-4 py-1.5 text-sm transition-colors sm:px-5 sm:py-2 hover:bg-ink-foreground hover:text-ink">
           Agendar
-        </a>}
+        </a>
       </nav>
       </header>
 
@@ -105,10 +105,10 @@ export function Hero() {
             Banho, tosa e bem-estar com calma, carinho e produtos premium. Um espaço pensado para o seu pet se sentir em casa.
           </motion.p>
           <motion.div variants={item} className="mt-5 flex flex-wrap items-center justify-center gap-4 sm:mt-8 sm:gap-6 lg:justify-start">
-            {!lead.closed && <a href={lead.whatsappUrl} target="_blank" rel="noreferrer" className="group inline-flex items-center gap-3 rounded-full bg-primary px-6 py-3 text-sm text-primary-foreground sm:px-8 sm:py-4 sm:text-base shadow-lg shadow-primary/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/30">
+            <a href={lead.whatsappUrl} target="_blank" rel="noreferrer" className="group inline-flex items-center gap-3 rounded-full bg-primary px-6 py-3 text-sm text-primary-foreground sm:px-8 sm:py-4 sm:text-base shadow-lg shadow-primary/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/30">
               <WhatsAppIcon />
               Agendar pelo WhatsApp
-            </a>}
+            </a>
             <a href="#servicos" className="text-sm text-ink-foreground underline-offset-8 hover:underline">Ver serviços →</a>
           </motion.div>
         </motion.div>
