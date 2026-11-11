@@ -321,7 +321,7 @@ function SmartSite() {
           </div>
           <a href={MAPS_DIRECTIONS_URL} target="_blank" rel="noopener noreferrer" className={`${ctaClass} mt-4`}>
             <MapPin className="size-5" />
-            Navegar Agora
+            Navegar Agora (GPS)
           </a>
         </section>
 
