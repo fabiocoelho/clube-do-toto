@@ -308,11 +308,7 @@ function SmartSite() {
 
         {/* Localização — Navegar Agora + Mapa */}
         <section className="w-full animate-fade-in" aria-label="Localização">
-          <a href={MAPS_DIRECTIONS_URL} target="_blank" rel="noopener noreferrer" className={ctaClass}>
-            <MapPin className="size-5" />
-            Navegar Agora
-          </a>
-          <div className="mt-4 overflow-hidden rounded-2xl border border-ink-foreground/10">
+          <div className="overflow-hidden rounded-2xl border border-ink-foreground/10">
             <iframe
               title={`Localização ${BRAND}`}
               src={MAPS_EMBED_URL}
@@ -323,6 +319,10 @@ function SmartSite() {
               referrerPolicy="no-referrer-when-downgrade"
             />
           </div>
+          <a href={MAPS_DIRECTIONS_URL} target="_blank" rel="noopener noreferrer" className={`${ctaClass} mt-4`}>
+            <MapPin className="size-5" />
+            Navegar Agora
+          </a>
         </section>
 
         {/* Rodapé */}
