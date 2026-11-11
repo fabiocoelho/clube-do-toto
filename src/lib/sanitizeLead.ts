@@ -65,3 +65,33 @@ export function mapsEmbedUrl(address: string): string {
 export function mapsDirectionsUrl(address: string): string {
   return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}`;
 }
+
+const stripAccents = (s: string) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+const alnum = (s: string) => stripAccents(s).replace(/[^A-Za-z0-9]/g, "");
+
+/**
+ * Splits a Google-style address ("Rua X, 12 - Bairro, Cidade - UF, 90000-000, Brasil")
+ * into [street + number + neighborhood, "Cidade - UF, Cep 90000-000"].
+ * When the city part can't be found, the whole address stays on line 1.
+ */
+export function formatAddressLines(raw: string): [string, string] {
+  const s = raw.trim().replace(/,?\s*Brasil\s*$/i, "");
+  const m = s.match(/^(.*?),\s*([^,]+?\s[-–]\s[A-Z]{2})(?:,\s*(\d{5}-?\d{3}))?$/);
+  if (!m) return [s, ""];
+  const [, street, cityUf, cep] = m;
+  const cepText = cep ? `, Cep ${cep.replace(/^(\d{5})(\d{3})$/, "$1-$2")}` : "";
+  return [street.trim(), `${cityUf.replace("–", "-").trim()}${cepText}`];
+}
+
+export const WIFI_SSID_MAX = 20;
+
+/** Business name without spaces, accents or symbols, cut at WIFI_SSID_MAX characters. */
+export function wifiNetworkName(name: string): string {
+  return alnum(name).slice(0, WIFI_SSID_MAX) || "WiFi";
+}
+
+/** First word of the business name (no accents/punctuation) + year, e.g. "Despachante2026". */
+export function wifiPassword(name: string, year: number): string {
+  const first = name.trim().split(/\s+/).map(alnum).find(Boolean) ?? "WiFi";
+  return `${first}${year}`;
+}

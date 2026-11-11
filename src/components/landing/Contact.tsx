@@ -25,7 +25,7 @@ export function Contact() {
             </a>
 
             <ul className="mt-5 space-y-2 text-[0.8rem] text-ink-muted sm:mt-10 sm:space-y-4 sm:text-base lg:mt-[3.5svh] lg:space-y-[1.4svh]">
-              <li className="flex gap-3 sm:gap-4"><MapPin className="h-4 w-4 shrink-0 text-primary sm:h-5 sm:w-5" strokeWidth={1.4} />{lead.address}</li>
+              <li className="flex gap-3 sm:gap-4"><MapPin className="h-4 w-4 shrink-0 text-primary sm:h-5 sm:w-5" strokeWidth={1.4} /><span><span className="block">{lead.addressLines[0]}</span>{lead.addressLines[1] && <span className="block">{lead.addressLines[1]}</span>}</span></li>
               <li className="flex gap-3 sm:gap-4"><Clock className="h-4 w-4 shrink-0 text-primary sm:h-5 sm:w-5" strokeWidth={1.4} />Seg a Sex 8h–19h · Sáb 8h–16h</li>
               <li className="flex gap-3 sm:gap-4"><Phone className="h-4 w-4 shrink-0 text-primary sm:h-5 sm:w-5" strokeWidth={1.4} />{lead.whatsappDisplay}</li>
               <li><a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="flex gap-3 transition-colors hover:text-ink-foreground sm:gap-4"><Instagram className="h-4 w-4 shrink-0 text-primary sm:h-5 sm:w-5" strokeWidth={1.4} />{INSTAGRAM_HANDLE}</a></li>

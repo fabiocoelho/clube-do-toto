@@ -6,9 +6,8 @@ export const WHATSAPP_URL =
 /** Static "Clube do Totó" fallbacks, used when a lead's column is empty. */
 export const MAPS_EMBED_URL = "https://www.google.com/maps?q=Porto+Alegre,+RS,+Brasil&z=13&output=embed";
 export const MAPS_DIRECTIONS_URL = "https://www.google.com/maps/dir/?api=1&destination=Porto+Alegre,+RS,+Brasil";
-export const ADDRESS = "Rua das Acácias, 123 — Jardim Botânico";
+export const ADDRESS = "Rua das Acácias, 123 - Jardim Botânico, Porto Alegre - RS, 90690-000";
 export const GOOGLE_REVIEW_URL = "https://www.google.com/search?q=Pet+Shop+Clube+do+Tot%C3%B3+Porto+Alegre";
-export const WIFI_PASSWORD = "clubedototo2026";
 
 /** Fixed for every lead (not parametrized). */
 export const INSTAGRAM_URL = "https://instagram.com/eu.fcoelho";

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { buildLead } from "@/components/landing/lead";
-import { ADDRESS, GOOGLE_REVIEW_URL, INSTAGRAM_URL, MAPS_EMBED_URL, WIFI_PASSWORD } from "@/components/landing/shared";
+import { ADDRESS, GOOGLE_REVIEW_URL, INSTAGRAM_URL, MAPS_EMBED_URL } from "@/components/landing/shared";
 
 const base = { nome_negocio: "PET LTDA", whatsapp: "51999998888" };
 
@@ -12,18 +12,23 @@ describe("buildLead", () => {
     expect(lead.mapsDirectionsUrl).toContain("destination=R.%20Giusepe%20Mandeli");
   });
 
-  it("uses link_avaliacao and senha_wifi when present", () => {
-    const lead = buildLead("abc", { ...base, link_avaliacao: "g.page/r/xyz/review", senha_wifi: "segredo123" });
+  it("uses link_avaliacao when present", () => {
+    const lead = buildLead("abc", { ...base, link_avaliacao: "g.page/r/xyz/review" });
     expect(lead.reviewUrl).toBe("https://g.page/r/xyz/review");
-    expect(lead.wifiPassword).toBe("segredo123");
+  });
+
+  it("generates the Wi-Fi password from the first word of the business name + current year", () => {
+    const lead = buildLead("abc", { ...base, nome_negocio: "Despachante Alessandro" });
+    expect(lead.wifiPassword).toBe(`Despachante${new Date().getFullYear()}`);
+    expect(lead.wifiNetwork).toBe("DespachanteAlessandr");
   });
 
   it("falls back to Clube do Totó data when the new columns are null or missing", () => {
-    const lead = buildLead("abc", { ...base, endereco: null, senha_wifi: "None" });
+    const lead = buildLead("abc", { ...base, endereco: null });
     expect(lead.address).toBe(ADDRESS);
+    expect(lead.addressLines).toEqual(["Rua das Acácias, 123 - Jardim Botânico", "Porto Alegre - RS, Cep 90690-000"]);
     expect(lead.mapsEmbedUrl).toBe(MAPS_EMBED_URL);
     expect(lead.reviewUrl).toBe(GOOGLE_REVIEW_URL);
-    expect(lead.wifiPassword).toBe(WIFI_PASSWORD);
   });
 
   it("ignores comercio_fechou: a closed business still gets its contact data", () => {

@@ -32,5 +32,5 @@ use the editor.
 ## Project rules
 
 - Background video play/pause behavior lives in `src/components/landing/useVideoControl.ts` and is reused by every page with a background video, so behavior stays identical everywhere.
-- Per-client data (name, WhatsApp, address, maps, review link, Wi-Fi) is built once by `buildLead` in `src/components/landing/lead.tsx` and read via `useLead()`; static fallbacks and fixed social links live in `src/components/landing/shared.tsx`, so pages never duplicate values.
+- Per-client data (name, WhatsApp, address + its 2-line split, maps, review link, generated Wi-Fi) is built once by `buildLead` in `src/components/landing/lead.tsx` and read via `useLead()`; static fallbacks and fixed social links live in `src/components/landing/shared.tsx`, so pages never duplicate values.
 - The lead query uses `select("*")` so optional columns missing from the table never break loading.
