@@ -1,8 +1,5 @@
 import { Clock, Instagram, MapPin, Navigation, Phone } from "lucide-react";
-import { Reveal, WHATSAPP_URL, WhatsAppIcon } from "./shared";
-
-const MAPS_EMBED_URL = "https://www.google.com/maps?q=Porto+Alegre,+RS,+Brasil&z=13&output=embed";
-const MAPS_DIRECTIONS_URL = "https://www.google.com/maps/dir/?api=1&destination=Porto+Alegre,+RS,+Brasil";
+import { ADDRESS, MAPS_DIRECTIONS_URL, MAPS_EMBED_URL, Reveal, WHATSAPP_URL, WhatsAppIcon } from "./shared";
 
 export function Contact() {
   return (
@@ -26,7 +23,7 @@ export function Contact() {
             </a>
 
             <ul className="mt-5 space-y-2 text-[0.8rem] text-ink-muted sm:mt-10 sm:space-y-4 sm:text-base lg:mt-[3.5svh] lg:space-y-[1.4svh]">
-              <li className="flex gap-3 sm:gap-4"><MapPin className="h-4 w-4 shrink-0 text-primary sm:h-5 sm:w-5" strokeWidth={1.4} />Rua das Acácias, 123 — Jardim Botânico</li>
+              <li className="flex gap-3 sm:gap-4"><MapPin className="h-4 w-4 shrink-0 text-primary sm:h-5 sm:w-5" strokeWidth={1.4} />{ADDRESS}</li>
               <li className="flex gap-3 sm:gap-4"><Clock className="h-4 w-4 shrink-0 text-primary sm:h-5 sm:w-5" strokeWidth={1.4} />Seg a Sex 8h–19h · Sáb 8h–16h</li>
               <li className="flex gap-3 sm:gap-4"><Phone className="h-4 w-4 shrink-0 text-primary sm:h-5 sm:w-5" strokeWidth={1.4} />(00) 00000-0000</li>
               <li className="flex gap-3 sm:gap-4"><Instagram className="h-4 w-4 shrink-0 text-primary sm:h-5 sm:w-5" strokeWidth={1.4} />@clubedototo</li>

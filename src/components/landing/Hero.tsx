@@ -1,9 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { CalendarCheck, Star } from "lucide-react";
 const HERO_VIDEO = "/hero-dog-loop.mp4";
 const HERO_POSTER = "/hero-dog-poster.jpg";
 import { WHATSAPP_URL, WhatsAppIcon } from "./shared";
+import { useVideoControl } from "./useVideoControl";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const item = {
@@ -12,39 +13,6 @@ const item = {
 };
 
 const GAP = 50;
-
-// Click/tap anywhere in the hero toggles play/pause; scrolling away from the top pauses, back to top resumes.
-function useHeroVideoControl() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  useEffect(() => {
-    const onScroll = () => {
-      const video = videoRef.current;
-      if (!video) return;
-      if (window.scrollY === 0) {
-        video.play().catch(() => {});
-      } else {
-        video.pause();
-      }
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  const togglePlay = (e: React.MouseEvent) => {
-    // Keep links and buttons (nav, "Agendar") working without toggling the video.
-    if ((e.target as HTMLElement).closest("a, button")) return;
-    const video = videoRef.current;
-    if (!video) return;
-    if (video.paused) {
-      video.play().catch(() => {});
-    } else {
-      video.pause();
-    }
-  };
-
-  return { videoRef, togglePlay };
-}
-
 
 // Scrolls anchor links so the section's content (past its top padding) lands GAP px below the fixed header.
 function useAnchorOffset() {
@@ -75,7 +43,7 @@ function useAnchorOffset() {
 
 export function Hero() {
   useAnchorOffset();
-  const { videoRef, togglePlay } = useHeroVideoControl();
+  const { videoRef, togglePlay } = useVideoControl();
   return (
     <section
       onClick={togglePlay}
