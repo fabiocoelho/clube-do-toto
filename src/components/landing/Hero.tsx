@@ -13,23 +13,36 @@ const item = {
 
 const GAP = 50;
 
-// Pauses the background video on any interaction; resumes only when back at the very top.
+// Click/tap anywhere in the hero toggles play/pause; scrolling away from the top pauses, back to top resumes.
 function useHeroVideoControl() {
   const videoRef = useRef<HTMLVideoElement>(null);
   useEffect(() => {
-    const play = () => { videoRef.current?.play().catch(() => {}); };
-    const pause = () => { videoRef.current?.pause(); };
-    const onScroll = () => (window.scrollY === 0 ? play() : pause());
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("mousedown", pause);
-    window.addEventListener("touchstart", pause, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("mousedown", pause);
-      window.removeEventListener("touchstart", pause);
+    const onScroll = () => {
+      const video = videoRef.current;
+      if (!video) return;
+      if (window.scrollY === 0) {
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
     };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
-  return videoRef;
+
+  const togglePlay = (e: React.MouseEvent) => {
+    // Keep links and buttons (nav, "Agendar") working without toggling the video.
+    if ((e.target as HTMLElement).closest("a, button")) return;
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  };
+
+  return { videoRef, togglePlay };
 }
 
 
@@ -62,9 +75,12 @@ function useAnchorOffset() {
 
 export function Hero() {
   useAnchorOffset();
-  const videoRef = useHeroVideoControl();
+  const { videoRef, togglePlay } = useHeroVideoControl();
   return (
-    <section className="relative z-10 isolate flex min-h-[100svh] bg-ink text-ink-foreground flex-col pt-[calc(4rem+env(safe-area-inset-top))] pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:pt-[calc(5rem+env(safe-area-inset-top))] sm:pb-8 lg:pb-10">
+    <section
+      onClick={togglePlay}
+      className="relative z-10 isolate flex min-h-[100svh] bg-ink text-ink-foreground flex-col pt-[calc(4rem+env(safe-area-inset-top))] pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:pt-[calc(5rem+env(safe-area-inset-top))] sm:pb-8 lg:pb-10"
+    >
       <header className="fixed inset-x-0 top-0 z-50 border-b border-ink-foreground/10 bg-ink/90 text-ink-foreground pt-[env(safe-area-inset-top)] backdrop-blur-md">
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-[max(1.5rem,env(safe-area-inset-left))] sm:h-20 lg:px-10">
         <a href="#" className="font-serif text-xl tracking-tight sm:text-2xl">
