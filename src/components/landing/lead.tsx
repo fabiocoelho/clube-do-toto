@@ -42,26 +42,26 @@ export const REDIRECT_URL = "https://getsite.com.br";
 
 /** Builds the Lead from a raw `leads` row, falling back to static data for empty columns. */
 export function buildLead(token: string, data: Record<string, unknown>): Lead {
-  const digits = whatsappDigits(data.whatsapp as string | null);
-  const name = cleanBusinessName(data.nome_negocio as string | null) || "Pet Shop";
-  const reviews = parseReviews(data.distribuicao_avaliacoes);
+  const digits = whatsappDigits(data["whatsapp"] as string | null);
+  const name = cleanBusinessName(data["nome_negocio"] as string | null) || "Pet Shop";
+  const reviews = parseReviews(data["distribuicao_avaliacoes"]);
   const text = encodeURIComponent(`Olá! Quero agendar um horário no ${name}`);
-  const address = cleanText(data.endereco);
+  const address = cleanText(data["endereco"]);
   return {
     token,
     name,
     whatsappDigits: digits,
-    whatsappDisplay: formatWhatsApp(data.whatsapp as string | null),
+    whatsappDisplay: formatWhatsApp(data["whatsapp"] as string | null),
     whatsappUrl: `https://wa.me/${digits}?text=${text}`,
-    rating: formatRating(data.nota_google as number | null),
+    rating: formatRating(data["nota_google"] as number | null),
     totalReviews: reviews.total,
     showTestimonials: reviews.showTestimonials,
-    site: cleanUrl(data.site),
+    site: cleanUrl(data["site"]),
     address: address ?? ADDRESS,
     mapsEmbedUrl: address ? mapsEmbedUrl(address) : MAPS_EMBED_URL,
     mapsDirectionsUrl: address ? mapsDirectionsUrl(address) : MAPS_DIRECTIONS_URL,
-    reviewUrl: cleanUrl(data.link_avaliacao) ?? GOOGLE_REVIEW_URL,
-    wifiPassword: cleanText(data.senha_wifi) ?? WIFI_PASSWORD,
+    reviewUrl: cleanUrl(data["link_avaliacao"]) ?? GOOGLE_REVIEW_URL,
+    wifiPassword: cleanText(data["senha_wifi"]) ?? WIFI_PASSWORD,
   };
 }
 
