@@ -99,7 +99,7 @@ export function Hero() {
       </header>
 
       {/* Background: looping muted video over a matching still (shown alone if motion is reduced) */}
-      <div aria-hidden className="absolute inset-0 -z-10 lg:left-[22%]">
+      <div aria-hidden className="absolute inset-0 -z-10 bg-ink lg:left-[22%]">
         <img src={HERO_POSTER} alt="" className="absolute inset-0 h-full w-full object-cover object-[55%_center]" />
         <video
           ref={videoRef}

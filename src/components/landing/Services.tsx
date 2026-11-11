@@ -13,7 +13,7 @@ const services: { icon: LucideIcon; title: string; text: string; span: string }[
 
 export function Services() {
   return (
-    <section id="servicos" className="bg-ink/10 pb-28 pt-48 lg:pb-36">
+    <section id="servicos" className="bg-secondary pb-28 pt-48 lg:pb-36">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal className="mb-16 grid gap-6 md:grid-cols-2 md:items-end">
           <div>
@@ -29,7 +29,7 @@ export function Services() {
           {services.map((s, i) =>
             i === 0 ? (
               <Reveal key={s.title} delay={0} className={s.span}>
-                <article className="group relative flex h-full min-h-[420px] flex-col justify-between overflow-hidden rounded-3xl border border-border bg-card p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl">
+                <article className="group relative flex h-full min-h-[420px] flex-col justify-between overflow-hidden rounded-3xl border border-border/60 bg-card p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl">
                   <img
                     src={bathImg}
                     alt="Cãozinho branco enrolado em toalha após o banho"
@@ -50,7 +50,7 @@ export function Services() {
               </Reveal>
             ) : (
               <Reveal key={s.title} delay={i * 0.08} className={s.span}>
-                <article className="group flex h-full flex-col justify-between rounded-3xl border border-border bg-card p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl">
+                <article className="group flex h-full flex-col justify-between rounded-3xl border border-border/60 bg-card p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl">
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent text-accent-foreground transition-transform duration-500 group-hover:scale-110">
                     <s.icon className="h-6 w-6" strokeWidth={1.4} />
                   </div>

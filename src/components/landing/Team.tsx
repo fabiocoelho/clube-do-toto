@@ -20,7 +20,7 @@ const tiles: Tile[] = [
 
 function PhotoTile({ src, name, role, h }: { src: string; name: string; role: string; h: string }) {
   return (
-    <div className={`group relative overflow-hidden rounded-3xl bg-muted ${h}`}>
+    <div className={`group relative overflow-hidden rounded-3xl border border-border/60 bg-muted shadow-sm ${h}`}>
       <img src={src} alt={`${name} — ${role}`} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
       <div className="absolute inset-0 flex items-end bg-ink/0 p-6 transition-colors duration-500 group-hover:bg-ink/50">
         <div className="translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
@@ -41,7 +41,7 @@ function PhotoTile({ src, name, role, h }: { src: string; name: string; role: st
 
 export function Team() {
   return (
-    <section id="equipe" className="bg-ink/10 py-28 lg:py-36">
+    <section id="equipe" className="bg-secondary py-28 lg:py-36">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal className="mb-16 max-w-2xl">
           <Eyebrow>Estrutura & equipe</Eyebrow>

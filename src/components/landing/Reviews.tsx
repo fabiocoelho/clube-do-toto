@@ -43,7 +43,7 @@ export function Reviews() {
       <div className="pause-on-hover relative [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
         <div className="animate-marquee flex w-max gap-6">
           {loop.map((r, i) => (
-            <figure key={i} className="w-[340px] shrink-0 rounded-3xl border border-border bg-card p-7">
+            <figure key={i} className="w-[340px] shrink-0 rounded-3xl border border-border/60 bg-card p-7 shadow-sm">
               <div className="flex items-center justify-between">
                 <Stars />
                 <GoogleG />
