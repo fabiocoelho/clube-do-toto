@@ -1,7 +1,9 @@
 import { Clock, Instagram, MapPin, Navigation, Phone } from "lucide-react";
-import { ADDRESS, MAPS_DIRECTIONS_URL, MAPS_EMBED_URL, Reveal, WHATSAPP_URL, WhatsAppIcon } from "./shared";
+import { ADDRESS, MAPS_DIRECTIONS_URL, MAPS_EMBED_URL, Reveal, WhatsAppIcon } from "./shared";
+import { useLead } from "./lead";
 
 export function Contact() {
+  const lead = useLead();
   return (
     <footer
       id="contato"
@@ -14,18 +16,18 @@ export function Contact() {
             <h2 className="font-serif text-[1.65rem] leading-[1.05] tracking-tight sm:text-4xl md:text-5xl lg:text-[clamp(1.9rem,7.5svh,3.75rem)]">Vem fazer parte do clube.</h2>
             <p className="mt-2 max-w-md text-[0.8rem] font-light leading-relaxed text-ink-muted sm:mt-5 sm:text-base lg:mt-[2svh]">Agende em menos de um minuto pelo WhatsApp. Respondemos rapidinho.</p>
 
-            <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="relative mt-4 inline-flex sm:mt-8 lg:mt-[3.5svh]">
+            {!lead.closed && <a href={lead.whatsappUrl} target="_blank" rel="noreferrer" className="relative mt-4 inline-flex sm:mt-8 lg:mt-[3.5svh]">
               <span className="absolute inset-0 animate-ping rounded-full bg-primary opacity-40 [animation-duration:2s]" />
               <span className="relative inline-flex items-center gap-2.5 rounded-full bg-primary px-6 py-3 text-sm text-primary-foreground transition-transform hover:scale-[1.03] sm:gap-3 sm:px-9 sm:py-5 sm:text-lg lg:py-[clamp(0.7rem,2svh,1.25rem)]">
                 <WhatsAppIcon className="h-5 w-5 sm:h-6 sm:w-6" />
                 Falar no WhatsApp
               </span>
-            </a>
+            </a>}
 
             <ul className="mt-5 space-y-2 text-[0.8rem] text-ink-muted sm:mt-10 sm:space-y-4 sm:text-base lg:mt-[3.5svh] lg:space-y-[1.4svh]">
               <li className="flex gap-3 sm:gap-4"><MapPin className="h-4 w-4 shrink-0 text-primary sm:h-5 sm:w-5" strokeWidth={1.4} />{ADDRESS}</li>
               <li className="flex gap-3 sm:gap-4"><Clock className="h-4 w-4 shrink-0 text-primary sm:h-5 sm:w-5" strokeWidth={1.4} />Seg a Sex 8h–19h · Sáb 8h–16h</li>
-              <li className="flex gap-3 sm:gap-4"><Phone className="h-4 w-4 shrink-0 text-primary sm:h-5 sm:w-5" strokeWidth={1.4} />(00) 00000-0000</li>
+              <li className="flex gap-3 sm:gap-4"><Phone className="h-4 w-4 shrink-0 text-primary sm:h-5 sm:w-5" strokeWidth={1.4} />{lead.whatsappDisplay}</li>
               <li className="flex gap-3 sm:gap-4"><Instagram className="h-4 w-4 shrink-0 text-primary sm:h-5 sm:w-5" strokeWidth={1.4} />@clubedototo</li>
             </ul>
           </Reveal>
@@ -33,7 +35,7 @@ export function Contact() {
           <Reveal delay={0.15}>
             <div className="relative aspect-[21/9] overflow-hidden rounded-[1.5rem] border border-ink-foreground/10 bg-ink-soft sm:aspect-[4/3] sm:rounded-[2rem] lg:aspect-auto lg:h-[min(56svh,30rem)]">
               <iframe
-                title="Mapa da localização do Clube do Totó em Porto Alegre"
+                title={`Mapa da localização de ${lead.name}`}
                 src={MAPS_EMBED_URL}
                 loading="lazy"
                 allowFullScreen
@@ -54,8 +56,8 @@ export function Contact() {
         </div>
 
         <div className="mt-6 flex flex-col justify-between gap-1.5 border-t border-ink-foreground/10 pt-3 text-xs text-ink-muted sm:mt-12 sm:gap-4 sm:pt-6 lg:mt-[3svh] lg:pt-[2svh] sm:text-sm md:flex-row">
-          <span className="font-serif text-sm text-ink-foreground sm:text-lg">Clube do Totó<span className="text-primary">.</span></span>
-          <span>© 2026 Clube do Totó. Feito com carinho para quem tem quatro patas.</span>
+          <span className="font-serif text-sm text-ink-foreground sm:text-lg">{lead.name}<span className="text-primary">.</span></span>
+          <span>© 2026 {lead.name}. Feito com carinho para quem tem quatro patas.</span>
         </div>
       </div>
     </footer>

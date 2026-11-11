@@ -30,10 +30,10 @@ import {
   MAPS_DIRECTIONS_URL,
   MAPS_EMBED_URL,
   TIKTOK_URL,
-  WHATSAPP_URL,
   WhatsAppIcon,
 } from "@/components/landing/shared";
 import { useVideoControl } from "@/components/landing/useVideoControl";
+import { LeadGate, useLead } from "@/components/landing/lead";
 // Temporary gallery: the project's own photos until real "Nosso Espaço" shots arrive.
 import g1 from "@/assets/service-bath.jpg";
 import g2 from "@/assets/team-groomer.jpg";
@@ -42,21 +42,13 @@ import g4 from "@/assets/team-daycare.jpg";
 
 const HERO_VIDEO = "/hero-dog-loop.mp4";
 const HERO_POSTER = "/hero-dog-poster.jpg";
-const BRAND = "Clube do Totó";
 
 const gallery = [g1, g2, g3, g4];
 
 /** Dados do Wi-Fi (edite aqui) */
-const WIFI = {
-  network: "ClubeDoToto_Clientes",
-  password: "clubedototo2026",
-};
+const WIFI_PASSWORD = "clubedototo2026";
 
 /** Dados do PIX (edite aqui) */
-const PIX = {
-  favorecido: "Pet Shop Clube do Totó",
-  chave: "5500000000000",
-};
 
 const GOOGLE_REVIEW_URL = "https://www.google.com/search?q=Pet+Shop+Clube+do+Tot%C3%B3+Porto+Alegre";
 
@@ -93,15 +85,15 @@ export const Route = createFileRoute("/smartsite")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: SmartSite,
+  component: SmartSitePage,
 });
 
 /** Logotipo em código: selo redondo com pata e nome da marca. */
-function BrandLogo() {
+function BrandLogo({ brand }: { brand: string }) {
   return (
     <div
       role="img"
-      aria-label={`Logotipo ${BRAND}`}
+      aria-label={`Logotipo ${brand}`}
       className="relative flex size-32 flex-col items-center justify-center rounded-full border-[6px] border-primary bg-ink shadow-2xl shadow-ink/40"
     >
       <span aria-hidden className="absolute inset-[5px] rounded-full border border-dashed border-ink-foreground/25" />
@@ -114,7 +106,20 @@ function BrandLogo() {
   );
 }
 
+function SmartSitePage() {
+  return (
+    <LeadGate>
+      <SmartSite />
+    </LeadGate>
+  );
+}
+
 function SmartSite() {
+  const lead = useLead();
+  const BRAND = lead.name;
+  const WIFI = { network: `${BRAND.replace(/\s+/g, "")}_Clientes`, password: WIFI_PASSWORD };
+  const PIX = { favorecido: BRAND, chave: lead.whatsappDigits };
+  const WHATSAPP_URL = lead.whatsappUrl;
   const [isScrolled, setIsScrolled] = useState(false);
   const { videoRef, togglePlay } = useVideoControl();
 
@@ -156,7 +161,7 @@ function SmartSite() {
           <div className="flex-[6] min-h-[40vh]" />
 
           <div className="flex flex-col items-center text-center animate-fade-in">
-            <BrandLogo />
+            <BrandLogo brand={BRAND} />
             <h1 className="mt-4 font-serif text-4xl tracking-tight">
               {BRAND}<span className="text-primary">.</span>
             </h1>
@@ -166,7 +171,7 @@ function SmartSite() {
                   <Star key={i} size={12} className="fill-star text-star" />
                 ))}
               </span>
-              <span className="text-xs text-ink-foreground/80">4,9 no Google · +600 avaliações</span>
+              <span className="text-xs text-ink-foreground/80">{lead.rating} no Google · +{lead.totalReviews} avaliações</span>
             </div>
           </div>
 
@@ -182,10 +187,10 @@ function SmartSite() {
           </div>
 
           <div className="w-full flex flex-col items-center">
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={`animate-pulse-ring ${ctaClass}`}>
+            {!lead.closed && <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={`animate-pulse-ring ${ctaClass}`}>
               <Calendar className="size-5" />
               Agendar Horário
-            </a>
+            </a>}
           </div>
         </div>
       </section>
@@ -202,18 +207,22 @@ function SmartSite() {
             <Star className="size-5 text-star fill-star" />
             Nos Avalie no Google
           </a>
-          <Link to="/" className={linkButtonClass}>
-            <Globe className="size-5 text-primary" />
-            Nosso Site
-          </Link>
-          <Link to="/" hash="servicos" className={linkButtonClass}>
+          {lead.site && (
+            <a href={lead.site} target="_blank" rel="noopener noreferrer" className={linkButtonClass}>
+              <Globe className="size-5 text-primary" />
+              Nosso Site
+            </a>
+          )}
+          <Link to="/" search={{ id: lead.token }} hash="servicos" className={linkButtonClass}>
             <Scissors className="size-5 text-primary" />
             Nossos Serviços
           </Link>
-          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={linkButtonClass}>
-            <WhatsAppIcon className="size-5 text-primary" />
-            Fale Conosco
-          </a>
+          {!lead.closed && (
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={linkButtonClass}>
+              <WhatsAppIcon className="size-5 text-primary" />
+              Fale Conosco
+            </a>
+          )}
 
           {/* Wi-Fi */}
           <Dialog>
