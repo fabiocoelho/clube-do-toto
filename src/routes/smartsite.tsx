@@ -9,7 +9,6 @@ import {
   MapPin,
   PawPrint,
   QrCode,
-  Scissors,
   Star,
   Wifi,
 } from "lucide-react";
@@ -102,7 +101,7 @@ function SmartSitePage() {
 function SmartSite() {
   const lead = useLead();
   const BRAND = lead.name;
-  const WIFI = { network: `${BRAND.replace(/\s+/g, "")}_Clientes`, password: lead.wifiPassword };
+  const WIFI = { network: lead.wifiNetwork, password: lead.wifiPassword };
   const PIX = { favorecido: BRAND, chave: lead.whatsappDigits };
   const WHATSAPP_URL = lead.whatsappUrl;
   const [isScrolled, setIsScrolled] = useState(false);
@@ -198,9 +197,9 @@ function SmartSite() {
               Nosso Site
             </a>
           )}
-          <Link to="/" search={{ id: lead.token }} hash="servicos" className={linkButtonClass}>
-            <Scissors className="size-5 text-primary" />
-            Nossos Serviços
+          <Link to="/" search={{ id: lead.token }} className={linkButtonClass}>
+            <Globe className="size-5 text-primary" />
+            Nosso Site
           </Link>
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={linkButtonClass}>
             <WhatsAppIcon className="size-5 text-primary" />
@@ -324,7 +323,10 @@ function SmartSite() {
               <Instagram className="size-6" />
             </a>
           </div>
-          <p className="text-xs text-ink-foreground/60 leading-relaxed">{lead.address}</p>
+          <p className="text-xs text-ink-foreground/60 leading-relaxed">
+            <span className="block">{lead.addressLines[0]}</span>
+            {lead.addressLines[1] && <span className="block">{lead.addressLines[1]}</span>}
+          </p>
         </footer>
       </div>
     </div>

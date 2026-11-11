@@ -4,14 +4,17 @@ import {
   cleanBusinessName,
   cleanText,
   cleanUrl,
+  formatAddressLines,
   formatRating,
   formatWhatsApp,
   mapsDirectionsUrl,
   mapsEmbedUrl,
   parseReviews,
   whatsappDigits,
+  wifiNetworkName,
+  wifiPassword,
 } from "@/lib/sanitizeLead";
-import { ADDRESS, GOOGLE_REVIEW_URL, MAPS_DIRECTIONS_URL, MAPS_EMBED_URL, WIFI_PASSWORD } from "./shared";
+import { ADDRESS, GOOGLE_REVIEW_URL, MAPS_DIRECTIONS_URL, MAPS_EMBED_URL } from "./shared";
 
 export type Lead = {
   token: string;
@@ -24,9 +27,12 @@ export type Lead = {
   showTestimonials: boolean;
   site: string | null;
   address: string;
+  /** [street, number, neighborhood] / [city - UF, CEP] */
+  addressLines: [string, string];
   mapsEmbedUrl: string;
   mapsDirectionsUrl: string;
   reviewUrl: string;
+  wifiNetwork: string;
   wifiPassword: string;
 };
 
@@ -58,10 +64,12 @@ export function buildLead(token: string, data: Record<string, unknown>): Lead {
     showTestimonials: reviews.showTestimonials,
     site: cleanUrl(data["site"]),
     address: address ?? ADDRESS,
+    addressLines: formatAddressLines(address ?? ADDRESS),
     mapsEmbedUrl: address ? mapsEmbedUrl(address) : MAPS_EMBED_URL,
     mapsDirectionsUrl: address ? mapsDirectionsUrl(address) : MAPS_DIRECTIONS_URL,
     reviewUrl: cleanUrl(data["link_avaliacao"]) ?? GOOGLE_REVIEW_URL,
-    wifiPassword: cleanText(data["senha_wifi"]) ?? WIFI_PASSWORD,
+    wifiNetwork: wifiNetworkName(name),
+    wifiPassword: wifiPassword(name, new Date().getFullYear()),
   };
 }
 
@@ -73,7 +81,7 @@ export function LeadGate({ children }: { children: ReactNode }) {
     const redirect = () => window.location.replace(REDIRECT_URL);
     if (!id) return redirect();
     let active = true;
-    // select("*") so optional columns (link_avaliacao, senha_wifi) never break the query when absent.
+    // select("*") so optional columns (endereco, link_avaliacao) never break the query when absent.
     getSupabase()
       .from("leads")
       .select("*")
