@@ -47,7 +47,7 @@ export function Contact() {
                 className="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full bg-ink/80 px-4 py-2 text-xs backdrop-blur transition-colors hover:bg-ink sm:bottom-5 sm:left-5"
               >
                 <Navigation className="h-3.5 w-3.5 text-primary" strokeWidth={1.8} />
-                Como Chegar (GPS)
+                Navegar Agora (GPS)
               </a>
             </div>
           </Reveal>
