@@ -5,6 +5,7 @@ import { Reviews } from "@/components/landing/Reviews";
 import { Team } from "@/components/landing/Team";
 import { Faq } from "@/components/landing/Faq";
 import { Contact } from "@/components/landing/Contact";
+import { LeadGate } from "@/components/landing/lead";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -22,6 +23,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
+    <LeadGate>
     <main className="overflow-x-hidden">
       <Hero />
       <Services />
@@ -30,5 +32,6 @@ function Index() {
       <Faq />
       <Contact />
     </main>
+    </LeadGate>
   );
 }

@@ -1,4 +1,5 @@
 import { Eyebrow, Reveal } from "./shared";
+import { useLead } from "./lead";
 
 const reviews = [
   { name: "Mariana L.", pet: "tutora do Bento", text: "O Bento voltou cheiroso, calmo e com laço! Atendimento impecável do início ao fim." },
@@ -33,7 +34,9 @@ function GoogleG() {
 }
 
 export function Reviews() {
+  const lead = useLead();
   const loop = [...reviews, ...reviews];
+  if (!lead.showTestimonials) return null;
   return (
     <section className="overflow-hidden border-y border-border bg-secondary py-28">
       <Reveal className="mx-auto mb-14 max-w-7xl px-6 text-center lg:px-10">

@@ -1,3 +1,4 @@
+import { useLead } from "./lead";
 import { motion } from "framer-motion";
 import vet from "@/assets/team-vet.jpg";
 import spa from "@/assets/team-spa.jpg";
@@ -54,7 +55,7 @@ export function Team() {
             ) : (
               <Reveal key={i} className="break-inside-avoid">
                 <div className={`flex aspect-[5/4] flex-col justify-between rounded-3xl p-8 ${t.tone === "primary" ? "bg-primary text-primary-foreground" : "bg-ink text-ink-foreground"}`}>
-                  <span className="text-xs uppercase tracking-[0.25em] opacity-70">Clube do Totó</span>
+                  <span className="text-xs uppercase tracking-[0.25em] opacity-70"><TeamBrand /></span>
                   <div>
                     <p className="font-serif text-6xl tracking-tight">{t.value}</p>
                     <p className="mt-2 font-light opacity-80">{t.label}</p>
@@ -67,4 +68,8 @@ export function Team() {
       </div>
     </section>
   );
+}
+
+function TeamBrand() {
+  return <>{useLead().name}</>;
 }

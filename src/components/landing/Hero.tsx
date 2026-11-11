@@ -3,7 +3,8 @@ import { motion } from "framer-motion";
 import { CalendarCheck, Star } from "lucide-react";
 const HERO_VIDEO = "/hero-dog-loop.mp4";
 const HERO_POSTER = "/hero-dog-poster.jpg";
-import { WHATSAPP_URL, WhatsAppIcon } from "./shared";
+import { WhatsAppIcon } from "./shared";
+import { useLead } from "./lead";
 import { useVideoControl } from "./useVideoControl";
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -44,6 +45,7 @@ function useAnchorOffset() {
 export function Hero() {
   useAnchorOffset();
   const { videoRef, togglePlay } = useVideoControl();
+  const lead = useLead();
   return (
     <section
       onClick={togglePlay}
@@ -52,7 +54,7 @@ export function Hero() {
       <header className="fixed inset-x-0 top-0 z-50 border-b border-ink-foreground/10 bg-ink/90 text-ink-foreground pt-[env(safe-area-inset-top)] backdrop-blur-md">
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-[max(1.5rem,env(safe-area-inset-left))] sm:h-20 lg:px-10">
         <a href="#" className="font-serif text-xl tracking-tight sm:text-2xl">
-          Pet Shop Clube do Totó<span className="text-primary">.</span>
+          {lead.name}<span className="text-primary">.</span>
         </a>
         <div className="hidden items-center gap-10 text-sm text-ink-muted md:flex">
           <a href="#servicos" className="transition-colors hover:text-ink-foreground">Serviços</a>
@@ -60,9 +62,9 @@ export function Hero() {
           <a href="#faq" className="transition-colors hover:text-ink-foreground">Dúvidas</a>
           <a href="#contato" className="transition-colors hover:text-ink-foreground">Contato</a>
         </div>
-        <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="rounded-full border border-ink-foreground/20 px-4 py-1.5 text-sm transition-colors sm:px-5 sm:py-2 hover:bg-ink-foreground hover:text-ink">
+        {!lead.closed && <a href={lead.whatsappUrl} target="_blank" rel="noreferrer" className="rounded-full border border-ink-foreground/20 px-4 py-1.5 text-sm transition-colors sm:px-5 sm:py-2 hover:bg-ink-foreground hover:text-ink">
           Agendar
-        </a>
+        </a>}
       </nav>
       </header>
 
@@ -94,7 +96,7 @@ export function Hero() {
         >
           <motion.p variants={item} className="mb-3 flex items-center justify-center gap-2 text-xs sm:mb-5 sm:text-sm lg:justify-start text-ink-foreground/85">
             <span className="flex text-star">{[...Array(5)].map((_, i) => <Star key={i} className="h-3.5 w-3.5 fill-current" />)}</span>
-            4,9 no Google · +600 avaliações
+            {lead.rating} no Google · +{lead.totalReviews} avaliações
           </motion.p>
           <motion.h1 variants={item} className="font-serif text-[2.1rem] font-normal leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl [@media(min-height:860px)]:xl:text-[5.5rem]">
             Cuidado de verdade, <em className="text-accent">amor incondicional</em>&nbsp;.
@@ -103,10 +105,10 @@ export function Hero() {
             Banho, tosa e bem-estar com calma, carinho e produtos premium. Um espaço pensado para o seu pet se sentir em casa.
           </motion.p>
           <motion.div variants={item} className="mt-5 flex flex-wrap items-center justify-center gap-4 sm:mt-8 sm:gap-6 lg:justify-start">
-            <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="group inline-flex items-center gap-3 rounded-full bg-primary px-6 py-3 text-sm text-primary-foreground sm:px-8 sm:py-4 sm:text-base shadow-lg shadow-primary/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/30">
+            {!lead.closed && <a href={lead.whatsappUrl} target="_blank" rel="noreferrer" className="group inline-flex items-center gap-3 rounded-full bg-primary px-6 py-3 text-sm text-primary-foreground sm:px-8 sm:py-4 sm:text-base shadow-lg shadow-primary/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/30">
               <WhatsAppIcon />
               Agendar pelo WhatsApp
-            </a>
+            </a>}
             <a href="#servicos" className="text-sm text-ink-foreground underline-offset-8 hover:underline">Ver serviços →</a>
           </motion.div>
         </motion.div>
