@@ -131,9 +131,10 @@ export function Hero() {
             <CalendarCheck className="h-5 w-5 text-primary" strokeWidth={1.5} />
           </div>
           <div className="animate-float-slow flex items-center gap-2 rounded-2xl border border-border bg-card px-3 py-1.5 text-card-foreground shadow-xl sm:gap-3 sm:px-4 sm:py-2.5">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent-foreground" />
-            </span>
+                <span className="relative flex h-2.5 w-2.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary" />
+                </span>
             <div>
               <p className="text-sm font-medium">Serviço Leva-Traz</p>
               <p className="text-xs text-muted-foreground">Disponível para bairros próximos</p>
