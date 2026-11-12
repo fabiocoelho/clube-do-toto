@@ -89,7 +89,7 @@ export function Hero() {
 
       <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center gap-4 px-5 py-4 sm:gap-8 sm:px-8 sm:py-6 lg:grid lg:grid-cols-12 lg:items-center lg:gap-12 lg:px-10">
         <motion.div
-          className="text-center lg:col-span-6 lg:text-left"
+          className="text-center lg:col-span-6 lg:text-left mt-5"
           initial="hidden"
           animate="show"
           variants={{ show: { transition: { staggerChildren: 0.15, delayChildren: 0.1 } } }}
@@ -114,7 +114,8 @@ export function Hero() {
         </motion.div>
 
         <motion.div
-          className="absolute inset-x-0 bottom-[max(1.25rem,env(safe-area-inset-bottom))] flex flex-col items-center gap-2 px-5 lg:static lg:col-span-6 lg:px-0 lg:items-end lg:justify-end lg:self-end lg:pt-0"
+          <motion.div
+          className="absolute inset-x-0 bottom-[max(1.25rem,env(safe-area-inset-bottom))] flex flex-col items-center gap-6 px-5 lg:static lg:col-span-6 lg:px-0 lg:items-end lg:justify-end lg:self-end lg:pt-0"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, ease, delay: 0.6 }}
