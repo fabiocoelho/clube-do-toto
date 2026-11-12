@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { CalendarCheck, Star } from "lucide-react";
+import { CalendarCheck, Star, Truck } from "lucide-react";
 const HERO_VIDEO = "/hero-dog-loop.mp4";
 const HERO_POSTER = "/hero-dog-poster.jpg";
 import { WhatsAppIcon } from "./shared";
@@ -87,7 +87,7 @@ export function Hero() {
       <div aria-hidden className="absolute inset-0 -z-10 hidden bg-gradient-to-r from-ink from-20% via-ink/75 via-45% to-ink/5 to-80% lg:block" />
       <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-t from-ink/60 to-transparent" />
 
-      <div className="mx-auto grid w-full max-w-7xl flex-1 content-center items-center gap-4 px-5 py-4 sm:gap-8 sm:px-8 sm:py-6 lg:grid-cols-12 lg:gap-12 lg:px-10">
+      <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center gap-4 px-5 py-4 sm:gap-8 sm:px-8 sm:py-6 lg:grid lg:grid-cols-12 lg:items-center lg:gap-12 lg:px-10">
         <motion.div
           className="text-center lg:col-span-6 lg:text-left"
           initial="hidden"
@@ -109,12 +109,12 @@ export function Hero() {
               <WhatsAppIcon />
               Agendar pelo WhatsApp
             </a>
-            <a href="#servicos" className="text-sm text-ink-foreground underline-offset-8 hover:underline">Ver serviços →</a>
+            <a href="#servicos" className="inline-flex items-center gap-2 rounded-full border border-ink-foreground/20 bg-ink-foreground/5 px-6 py-3 text-sm text-ink-foreground backdrop-blur-sm transition-colors hover:border-ink-foreground/40 hover:bg-ink-foreground/10 sm:px-8 sm:py-4 sm:text-base">Ver serviços →</a>
           </motion.div>
         </motion.div>
 
         <motion.div
-          className="flex justify-center lg:col-span-6 lg:justify-end lg:self-end"
+          className="mt-auto flex flex-col items-center gap-3 pt-6 lg:col-span-6 lg:mt-0 lg:items-end lg:justify-end lg:self-end lg:pt-0"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, ease, delay: 0.6 }}
@@ -129,6 +129,16 @@ export function Hero() {
               <p className="text-xs text-muted-foreground">Consulte no WhatsApp</p>
             </div>
             <CalendarCheck className="h-5 w-5 text-primary" strokeWidth={1.5} />
+          </div>
+          <div className="flex items-center gap-2 rounded-2xl border border-border bg-card px-3 py-2 text-card-foreground shadow-xl sm:gap-3 sm:px-5 sm:py-4">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent-foreground" />
+            </span>
+            <div>
+              <p className="text-sm font-medium">Serviço Leva-Traz</p>
+              <p className="text-xs text-muted-foreground">Disponível para bairros próximos</p>
+            </div>
+            <Truck className="h-5 w-5 text-primary" strokeWidth={1.5} />
           </div>
         </motion.div>
       </div>
