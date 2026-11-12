@@ -75,11 +75,13 @@ export function buildLead(token: string, data: Record<string, unknown>): Lead {
 }
 
 /** Built-in demo client, shown for `?id=demo` / `?=demo` and in the Lovable preview without a token. */
-export const DEMO_LEAD: Lead = buildLead(DEMO_TOKEN, {
-  nome_negocio: "Pet Shop Clube do Totó",
-  nota_google: 5,
-  distribuicao_avaliacoes: { fiveStar: 42 },
-});
+// Built lazily: the Wi-Fi password uses the current year, which is not available at module scope on the server.
+export const demoLead = (): Lead =>
+  buildLead(DEMO_TOKEN, {
+    nome_negocio: "Pet Shop Clube do Totó",
+    nota_google: 5,
+    distribuicao_avaliacoes: { fiveStar: 42 },
+  });
 
 export function LeadGate({ children }: { children: ReactNode }) {
   const [lead, setLead] = useState<Lead | null>(null);
@@ -92,8 +94,8 @@ export function LeadGate({ children }: { children: ReactNode }) {
     const redirect = () => window.location.replace(REDIRECT_URL);
     const token = readLeadToken(window.location.search);
     // Demo works everywhere; inside the Lovable preview a missing token also shows the demo.
-    if (!token) return isPreviewHost(window.location.hostname) ? show(DEMO_LEAD) : redirect();
-    if (isDemoToken(token)) return show(DEMO_LEAD);
+    if (!token) return isPreviewHost(window.location.hostname) ? show(demoLead()) : redirect();
+    if (isDemoToken(token)) return show(demoLead());
     const id = token;
     let active = true;
     // select("*") so optional columns (endereco, link_avaliacao) never break the query when absent.

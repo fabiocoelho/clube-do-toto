@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { isPreviewHost, readLeadToken } from "@/lib/leadAccess";
-import { DEMO_LEAD } from "@/components/landing/lead";
+import { demoLead } from "@/components/landing/lead";
 
 describe("readLeadToken", () => {
   it("reads ?id=", () => expect(readLeadToken("?id=048c1a")).toBe("048c1a"));
@@ -27,8 +27,9 @@ describe("isPreviewHost", () => {
   });
 });
 
-describe("DEMO_LEAD", () => {
+describe("demoLead", () => {
   it("is the Pet Shop Clube do Totó with static fallbacks", () => {
+    const DEMO_LEAD = demoLead();
     expect(DEMO_LEAD.name).toBe("Pet Shop Clube do Totó");
     expect(DEMO_LEAD.token).toBe("demo");
     expect(DEMO_LEAD.rating).toBe("5,0");
