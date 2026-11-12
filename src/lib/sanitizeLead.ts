@@ -78,7 +78,7 @@ export function formatAddressLines(raw: string): [string, string] {
   const s = raw.trim().replace(/,?\s*Brasil\s*$/i, "");
   const m = s.match(/^(.*?),\s*([^,]+?\s[-–]\s[A-Z]{2})(?:,\s*(\d{5}-?\d{3}))?$/);
   if (!m) return [s, ""];
-  const [, street, cityUf, cep] = m;
+  const [, street = s, cityUf = "", cep] = m;
   const cepText = cep ? `, Cep ${cep.replace(/^(\d{5})(\d{3})$/, "$1-$2")}` : "";
   return [street.trim(), `${cityUf.replace("–", "-").trim()}${cepText}`];
 }
