@@ -102,7 +102,7 @@ export function Hero() {
             Cuidado de verdade, <em className="text-accent">amor incondicional</em>&nbsp;.
           </motion.h1>
           <motion.p variants={item} className="mx-auto mt-3 max-w-md text-sm font-light sm:mt-6 sm:text-lg lg:mx-0 leading-relaxed text-ink-foreground/85">
-            Banho, tosa e bem-estar com calma, carinho e produtos premium. Um espaço pensado para o seu pet se sentir em casa.
+            Banho e tosa com calma, carinho e produtos premium. Um espaço pensado para o seu pet se sentir em casa.
           </motion.p>
           <motion.div variants={item} className="mt-5 flex flex-wrap items-center justify-center gap-4 sm:mt-8 sm:gap-6 lg:justify-start">
             <a href={lead.whatsappUrl} target="_blank" rel="noreferrer" className="group inline-flex items-center gap-3 rounded-full bg-primary px-6 py-3 text-sm text-primary-foreground sm:px-8 sm:py-4 sm:text-base shadow-lg shadow-primary/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/30">
