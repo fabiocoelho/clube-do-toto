@@ -114,7 +114,7 @@ export function Hero() {
         </motion.div>
 
         <motion.div
-          className="mt-auto flex flex-col items-center gap-3 pt-6 lg:col-span-6 lg:mt-0 lg:items-end lg:justify-end lg:self-end lg:pt-0"
+          className="flex flex-col items-center gap-3 pt-6 lg:col-span-6 lg:items-end lg:justify-end lg:self-end lg:pt-0"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, ease, delay: 0.6 }}
@@ -130,7 +130,7 @@ export function Hero() {
             </div>
             <CalendarCheck className="h-5 w-5 text-primary" strokeWidth={1.5} />
           </div>
-          <div className="flex items-center gap-2 rounded-2xl border border-border bg-card px-3 py-2 text-card-foreground shadow-xl sm:gap-3 sm:px-5 sm:py-4">
+          <div className="animate-float-slow flex items-center gap-2 rounded-2xl border border-border bg-card px-3 py-2 text-card-foreground shadow-xl sm:gap-3 sm:px-5 sm:py-4">
             <span className="relative flex h-2.5 w-2.5">
               <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent-foreground" />
             </span>
