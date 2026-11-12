@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { CalendarCheck, Star } from "lucide-react";
+import { CalendarCheck, Star, Truck } from "lucide-react";
 const HERO_VIDEO = "/hero-dog-loop.mp4";
 const HERO_POSTER = "/hero-dog-poster.jpg";
 import { WhatsAppIcon } from "./shared";
@@ -109,7 +109,7 @@ export function Hero() {
               <WhatsAppIcon />
               Agendar pelo WhatsApp
             </a>
-            <a href="#servicos" className="text-sm text-ink-foreground underline-offset-8 hover:underline">Ver serviços →</a>
+            <a href="#servicos" className="inline-flex items-center gap-2 rounded-full border border-ink-foreground/20 bg-ink-foreground/5 px-6 py-3 text-sm text-ink-foreground backdrop-blur-sm transition-colors hover:border-ink-foreground/40 hover:bg-ink-foreground/10 sm:px-8 sm:py-4 sm:text-base">Ver serviços →</a>
           </motion.div>
         </motion.div>
 
